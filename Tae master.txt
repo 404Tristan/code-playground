@@ -2,3 +2,6 @@ Apple
 orange
 
 Master Jackie Chan
+Fruty Mangoes
+
+Another new text for Master branch
