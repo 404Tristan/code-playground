@@ -1,5 +1,5 @@
 user_list = ["tristan","lucas"]
-password_list = ["123","qwe"]
+password_list = ["123","qwe",]
 
 def log_in():
     login_attempt = 0
@@ -14,11 +14,7 @@ def log_in():
                 if x == user_name and y == pass_word:
                     print(f"Welcome {user_name}")
                     account_status = True
-            #Comment the error
-            # else:
-            #     if x != user_name and y != pass_word:
-            #         print("Wrong username or password 090")
-
+                    break
 
         else: print("Wrong username or password")
         print()
