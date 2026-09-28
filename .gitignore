@@ -9,3 +9,5 @@
 Python_Scoping/
 
 main.py/
+
+__pycache__/
