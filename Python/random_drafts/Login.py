@@ -2,38 +2,43 @@ list_of_users = []
 
 def log_in():
     login_attempt = 0
-    account_status = False
-    while True:
+    login = True
+
+
+    while login:
         print()
+        print(f"Log-in attempt ({login_attempt}/3)")
         user_name = input("Enter your username: ")
         pass_word = input("Enter your password: ")
 
         for user in list_of_users:
             if user_name == user["username"] and pass_word == user["password"]:
                 print(f"Welcome {user_name}")
+                login = False
                 break
-        else: print("Wrong username or password")
-        print()
-
-        login_attempt += 1
-
-        if login_attempt == 2 : print("You only have 1 remaining attempt to login again")
-        elif login_attempt == 3:
-            forgot_password = input("Forgot your password? ").lower()
-            if forgot_password == 'y':
-                #Username instead of verified email since we're just testing our coding skills, also we don't have that features yet
-                user_name = input("Enter your username: ")
-                for x,y in zip(user_list,password_list):
-                    if x == user_name:
-                        print(f"Your password is {y}, please try to login again")
-                else:
-                    if x != user_name:
-                        print("We currently don't have it in our database. Please try again later, as you exceed 3 maximum attempt")
-            else:
-                print("Please try again later, as you exceed 3 maximum attempt")
-                break
-        if account_status == True:
+        else:
+            print("Wrong username or password")
+            login_attempt += 1
+            print()
+        if not login:
             break
+
+        if login_attempt == 4:
+            # Username login used for testing; email verification not yet supported
+            forgot_password = input("Forgot your password? ").lower()
+
+            if forgot_password[0] == 'y':
+                user_name = input("Enter your username: ")
+                for user in list_of_users:
+                    if user_name == user["username"]:
+                        print(f"Your password is {user["password"]}, please try to login again")
+                        break
+                else:
+                    print("Record not found. Maximum attempts (3/3) exceeded. Please try again later.")
+                    break
+            else:
+                print("Maximum attempts (3/3) exceeded. Please try again later.")
+                break
 
 def sign_up():
     user_name = input("Enter username: ")
@@ -42,16 +47,16 @@ def sign_up():
         "username": user_name,
         "password": pass_word
     }
+
     list_of_users.append(create_account)
     log_in()
 
 account_status = input("Do you already have an account? ").lower()
 
-for x in account_status:
-    if x == 'y':
-        log_in()
-    elif x == 'n':
-        sign_up()
-    else: print("Invalid response")
-    break
 
+if account_status[0] == 'y':
+    log_in()
+elif account_status[0] == 'n':
+    sign_up()
+else:
+    print("Invalid response")
