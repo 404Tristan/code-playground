@@ -1,5 +1,4 @@
-user_list = ["tristan","lucas"]
-password_list = ["123","qwe",]
+list_of_users = []
 
 def log_in():
     login_attempt = 0
@@ -9,13 +8,10 @@ def log_in():
         user_name = input("Enter your username: ")
         pass_word = input("Enter your password: ")
 
-        if user_name in user_list and pass_word in password_list:
-            for x,y in zip(user_list,password_list):
-                if x == user_name and y == pass_word:
-                    print(f"Welcome {user_name}")
-                    account_status = True
-                    break
-
+        for user in list_of_users:
+            if user_name == user["username"] and pass_word == user["password"]:
+                print(f"Welcome {user_name}")
+                break
         else: print("Wrong username or password")
         print()
 
@@ -38,11 +34,15 @@ def log_in():
                 break
         if account_status == True:
             break
+
 def sign_up():
     user_name = input("Enter username: ")
     pass_word = input("Enter password: ")
-    user_list.append(user_name)
-    password_list.append(pass_word)
+    create_account = {
+        "username": user_name,
+        "password": pass_word
+    }
+    list_of_users.append(create_account)
     log_in()
 
 account_status = input("Do you already have an account? ").lower()
