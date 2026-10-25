@@ -1,31 +1,24 @@
-def binary_search(numbers_list,target):
-    middle = (len(numbers_list)-1)//2                                       # to know the middle which is 5 that has a value of 6
-    full_lenght = len(numbers_list)-1                                       # 11-1 = 10, useful to access list indeces
-    state = True                                                            # Useful when the target is in left by setting it in False
+def binary_search(numbers, target):
+    middle = len(numbers) // 2
+    right = len(numbers) # For Middle can access last element
+    left = 0
 
-    if target in numbers_list:                                              # If conditional. Return not in list if False
-        while True:                                                         # Always true
-            if numbers_list[middle] == target:
-                return middle                                               # return the current index of the target
-            elif numbers_list[middle] < target:
-                if state == True:                                           # For right target
-                    current = middle + 1
-                    middle = ((full_lenght-current)//2) + current
-                else:                                                       # For left target
-                    current = middle + 1
-                    middle = ((current-full_lenght)//2) + current
+    while left < right:
+        if numbers[middle] == target:
+            return middle # return index of target
 
-            elif numbers_list[middle] > target:
-                full_lenght = 0
-                current = middle - 1
-                middle = (current//2)
-                state = False
+        # Right:
+        elif numbers[middle] < target:
+            left = middle + 1
+            middle = (right - middle) // 2 + middle
 
-    else:
-        return "Search not found"
+        # Left
+        elif numbers[middle] > target:
+            right = middle
+            middle = middle//2
 
+               #  0   1   2   3   4   5   6   7   8   9
+list_of_number = [6, 12, 18, 24, 30, 36, 42, 48, 54, 60]
 
-numbers_list = [1,2,3,4,5,6,7,8,9,10,11]
-target = int(input("Search a number in a list: "))
-print(f"Its in index: {binary_search(numbers_list,target)}")
-
+target = int(input("Check index: "))
+print(f"The index is: {binary_search(list_of_number,target)}")
